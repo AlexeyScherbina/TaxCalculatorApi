@@ -15,7 +15,7 @@ namespace TaxCalculatorApi.Services
 
         public void AddPayer(PayerDto dto)
         {
-            _cache.CreateEntry(dto.Ssn).SetValue(dto.FullName);
+            _cache.Set(dto.Ssn, dto.FullName);
         }
 
         public string GetPayer(string ssn)

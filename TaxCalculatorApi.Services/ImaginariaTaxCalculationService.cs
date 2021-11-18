@@ -42,7 +42,6 @@ namespace TaxCalculatorApi.Services
                 ? SocialContributionsMaxAmount
                 : gross) - MinTaxationAmount;
 
-            result.IncomeTax = gross * IncomeTax;
             result.SocialTax = socialContributionsGross * SocialContributions;
 
             return result;

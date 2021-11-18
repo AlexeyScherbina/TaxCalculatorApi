@@ -43,7 +43,7 @@ namespace TaxCalculatorApi.Services
             {
                 throw new ValidationException("FullName should contain at least two words separated by space");
             }
-            if (Regex.IsMatch(dto.FullName, "[^0-9]"))
+            if (!Regex.IsMatch(dto.FullName, "^([^0-9]*)$"))
             {
                 throw new ValidationException("FullName should contain symbols letters and spaces only");
             }
@@ -52,7 +52,7 @@ namespace TaxCalculatorApi.Services
             {
                 throw new ValidationException("SSN is missing");
             }
-            if (Regex.IsMatch(dto.Ssn, "^[0-9]+$"))
+            if (!Regex.IsMatch(dto.Ssn, "^[0-9]+$"))
             {
                 throw new ValidationException("SSN should contain only digits");
             }
@@ -66,7 +66,7 @@ namespace TaxCalculatorApi.Services
                 throw new ValidationException("GrossIncome is invalid");
             }
 
-            if (dto.CharitySpent is <= 0)
+            if (dto.CharitySpent is < 0)
             {
                 throw new ValidationException("CharitySpent is invalid");
             }
@@ -78,7 +78,7 @@ namespace TaxCalculatorApi.Services
 
             if (existingPayer != null)
             {
-                if (existingPayer != dto.Ssn)
+                if (existingPayer != dto.FullName)
                 {
                     throw new ValidationException($"Payer with SSN '{dto.Ssn}' already exists.");
                 }

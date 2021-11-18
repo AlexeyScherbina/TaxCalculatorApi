@@ -24,15 +24,15 @@ namespace TaxCalculatorApi.Middlewares
             }
             catch (ValidationException ex)
             {
-                await HandleException(context.Response, ex, HttpStatusCode.BadRequest, ex.Message);
+                await HandleException(context.Response, HttpStatusCode.BadRequest, ex.Message);
             }
             catch (Exception ex)
             {
-                await HandleException(context.Response, ex, HttpStatusCode.InternalServerError, ex.Message);
+                await HandleException(context.Response, HttpStatusCode.InternalServerError, ex.Message);
             }
         }
 
-        private Task HandleException(HttpResponse response, Exception exception, HttpStatusCode statusCode, object responseToWrite = null)
+        private Task HandleException(HttpResponse response, HttpStatusCode statusCode, object responseToWrite = null)
         {
             response.StatusCode = (int)statusCode;
 
